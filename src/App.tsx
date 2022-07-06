@@ -3,36 +3,36 @@ import ReelsController from './components/ReelsController'
 import ReelComponent from './components/Reel'
 import AppStyles from './App.module.css';
 
-import {IntersectHandler} from 'core-ui/intersection-observer/v1'
+// import {IntersectHandler} from 'core-ui/intersection-observer/v1'
+import { IntersectionObserverHandler } from 'core-ui/intersection-observer/v2'
 
 import API from './api'
 import Reel from './model/type/Reel'
 
 function App() {
+  // Endpoint to fetch reels
+  const loadMoreReels = () => {
+    API.getNextReel().then((data)=> setReels((prevReels) => [...prevReels, ...data]))
+  }
+
   // list of reels loaded from API
   const [reels, setReels] = useState<Reel[]>([])
+  
   // Intersection Observer handler to load more Reels
-  const { setNode: setLoadMoreNode, entry: loadMoreEntry } = IntersectHandler({})
+  const [loadMoreIOEntry, setLoadMoreEntry] = useState<IntersectionObserverEntry>()
+  const loadMoreIOHandler = new IntersectionObserverHandler({ notifyInview: setLoadMoreEntry })
+  
   // static element used to observe intersection
   const node = useRef<HTMLElement>(null)
-  // method to load more reels
-  const loadMoreReels = () => {
-    API.getNextReel().then((data)=> {
-      setReels((prevReels) => [...prevReels, ...data])
-    })
-  }
 
   // watch intersection to load more reels
   useEffect(() => {
-    // console.log('loadMoreEntry', loadMoreEntry)
-    if (loadMoreEntry && loadMoreEntry.isIntersecting) {
-      loadMoreReels()
-    }
-  }, [loadMoreEntry])
+    if (loadMoreIOEntry && loadMoreIOEntry.isIntersecting)  loadMoreReels()
+  }, [loadMoreIOEntry])
 
   // set node to observe
   useEffect(() => {
-    if (node.current) setLoadMoreNode(node.current)
+    if (node.current) loadMoreIOHandler.observeNode(node.current)
   }, [node])
 
   // current Reel visible in the screen
