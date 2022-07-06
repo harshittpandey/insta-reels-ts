@@ -1,0 +1,33 @@
+1. create reel with loading state
+2. infinite scrolling - with loading state
+3. [if] infinte scrolling - static number of dom items
+4. [else] infinte scrolling - how to use remove previous dom nodes?
+5. only current reel should be played. previous should show paused video player. next reels should show thumbnail until video player is loaded.
+6. clickable button with animations. double click. like. single click - mute
+7. 
+
+
+infinite scrolling - with loading state
+ - reel is currentReel = play reel
+ - else pause/stop reel
+ - next reel = donot load video player. show thumbnail
+
+// sync issues. code works fine something else is fucked.
+ if (current reel) { // or video loaded
+    load url in the video tag
+    // play video
+ } else {
+    show thumbnail
+    // pause/ stop video
+}
+
+- use thumbnail and infinite reel loading - done
+- have static amount of nodes
+  - can have 3 nodes (prev, current, next)
+  - currently every reel has an intersection observer. which is inefficient
+  - maintain current idx. based on that, prev/ curr/ next can be calculated.
+    - initially current idx = 0
+  - based on scroll, first load. maintain these three nodes.
+  - null checks for these 3 nodes.
+- allow actions only on the current reel
+- use another video player

@@ -1,0 +1,18 @@
+.reels-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  /* tailwind alternative are present */
+  scroll-snap-type: y mandatory;
+}
+
+/* Hide scrollbar for chrome, safari and opera */
+.reels-container::-webkit-scrollbar {
+  display: none;  
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.reels-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
