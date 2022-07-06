@@ -37,19 +37,13 @@ function App() {
 
   // current Reel visible in the screen
   const [currentReel, updateCurrentReel] = useState('')
-  const reelScrollObserver = useRef<IntersectionObserver>(
-    new window.IntersectionObserver((entries) => {
-      // logging the reel which is rendering currently
-      // console.log(
-      //   entries.map(entry => `${entry.target.getAttribute('data-reel-id')}: ${entry.isIntersecting}`)
-      // )
-      const currentReel = entries.find(entry => entry.isIntersecting)
-      if (currentReel && currentReel.target.getAttribute('data-reel-id')) {
-        const reelId: string = currentReel.target.getAttribute('data-reel-id') as string
-        updateCurrentReel(reelId)
-      }
-    })
-  );
+  const inViewReelHandler = (currentReelEntry: IntersectionObserverEntry) => {
+    if (currentReelEntry.isIntersecting) {
+      const reelId: string = currentReelEntry.target.getAttribute('data-reel-id') as string
+      updateCurrentReel(reelId)
+    }
+  }
+  const reelScrollObserver = new IntersectionObserverHandler({ notifyInview: inViewReelHandler })
 
   return (
     <div className={`${AppStyles['reels-container']} w-screen h-screen`}>

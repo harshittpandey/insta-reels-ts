@@ -4,28 +4,18 @@ import ReelHandler from '../ReelHandler'
 import {ReelProp} from 'model/type/Reel'
 import ReelStyles from './Reel.module.css'
 
+import {IntersectionObserverHandler} from 'core-ui/intersection-observer/v2'
+
 interface reelPropUpdated {
-    reelObserver?: RefObject<IntersectionObserver>
+    reelObserver: IntersectionObserverHandler
     isCurrentReel: Boolean
 }
 
 const Reel:React.FC<reelPropUpdated & ReelProp> = ({ reel, reelObserver, isCurrentReel }) => {
     const node = useRef<HTMLDivElement>(null)
-    // const [isCurrentReel, updateisCurrentReel] = useState(false)
-    // const observer = useRef<IntersectionObserver>(
-        // new window.IntersectionObserver(([entry]) => {
-            // console.log(reel, entry.isIntersecting)
-            // updateisCurrentReel(entry.isIntersecting)
-        // })
-    // );
 
     useEffect(() => {
-        if (node.current) {
-            if (reelObserver && reelObserver.current) {
-                reelObserver.current.observe(node.current)
-            }
-            // observer.current.observe(node.current)
-        }
+        node.current && reelObserver.observeNode(node.current)
     }, [])
 
     return (
