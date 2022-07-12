@@ -21,8 +21,10 @@ const Reel:React.FC<reelPropUpdated & ReelProp> = ({ reel, reelObserver, isCurre
     return (
         <div className={`${ReelStyles.reel} w-full h-full`}>
             <span className="absolute text-blue-400 right-0">{'isShown: ' + isCurrentReel}</span>
-            <ReelVideo reel={ reel } isCurrentReelVisible={ isCurrentReel } />
-            <ReelHandler reel={ reel } />
+            <div className="w-full h-full">
+                <ReelVideo reel={ reel } isCurrentReelVisible={ isCurrentReel } />
+                <ReelHandler reel={ reel } isCurrentReelVisible={ isCurrentReel } />
+            </div>
             <div id="screenTop" className="-translate-y-2" ref={node} data-reel-id={reel._id}></div>
         </div>
     )

@@ -6,14 +6,19 @@ import ReelAudio from "./ReelDescription/ReelAudio"
 
 import { ReelProp } from "../../model/type/Reel"
 
-const ReelHandler: React.FC<ReelProp> = ({reel}) => {
+interface updatedReelProps extends ReelProp {
+    isCurrentReelVisible: Boolean,
+    isLikedByMe?: Boolean
+}
+
+const ReelHandler: React.FC<updatedReelProps> = ({reel, isCurrentReelVisible, isLikedByMe = true}) => {
     useEffect(() => {
         // console.log(reel.audio)
     }, [])
     return (
         <div className={"reel-handler mx-3 my-3 flex flex-wrap absolute bottom-0 " + ReelHanlderStyles.reelHandler}>
             <ReelDescription reel={reel} />
-            <ReelActions />
+            <ReelActions isCurrentReelVisible={isCurrentReelVisible} isLikedByMe={isLikedByMe} />
             {
                 reel.audio &&
                 (
