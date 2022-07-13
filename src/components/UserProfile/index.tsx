@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, DOMAttributes } from "react"
 import ProfileImage from "./ProfileImage"
 import User from "model/type/User"
 import { UserProp } from "model/type/User"
 import API from "api"
 
 interface UserProfile {
-    author?: User
+    author: User
     showFollowStatus?: Boolean
 }
 
-const UserProfile: React.FC<UserProp> = ({author}) => {
+interface ChildrenProps {
+    children?: DOMAttributes<string>
+}
+
+const UserProfile: React.FC<React.PropsWithChildren<UserProfile & ChildrenProps>> = ({author, children}) => {
     const showFollowStatus = true
     let [_author, setAuthor] = useState<User>(author)
     const [following, setFollowing] = useState<Boolean>(API.isFollowing('103547991597142817351', author._id))
@@ -23,18 +27,25 @@ const UserProfile: React.FC<UserProp> = ({author}) => {
     }, [author])
 
     return (
-        <div className="flex items-center text-lg text-white">
+        <div className="flex items-center text-md text-white">
             <ProfileImage {..._author} />
-            <div className="ml-3 font-medium">{_author.name}</div>
-            <span className="mx-2 text-2xl">&#8226;</span>
-            {
-                showFollowStatus && 
-                (
-                    <div className="font-normal">
-                        {following ? 'Following' : 'Follow'}
-                    </div>
-                )
-            }
+            <div className="ml-3 font-medium">
+                <div className="flex items-center">
+                    {_author.name}
+                    <span className="mx-2 text-2xl">&#8226;</span>
+                    {
+                        showFollowStatus && 
+                        (
+                            <div className="font-normal text-base">
+                                {following ? 'Following' : 'Follow'}
+                            </div>
+                        )
+                    }
+                </div>
+                <div>
+                    { children }
+                </div>
+            </div>
         </div>
     )
 }

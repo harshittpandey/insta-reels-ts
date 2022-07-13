@@ -5,3 +5,13 @@
     scroll-snap-align: start;
     background: black;
 }
+
+.videoOnCommentLayout {
+    transform: scale(40%, 40%) translate(0 ,-75%);
+}
+
+.commentContainer {
+    position: absolute;
+    top: 0;
+    transform: translate(0, 40%);
+}

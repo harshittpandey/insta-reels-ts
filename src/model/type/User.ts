@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface UserProp {
-    [key: string]: User
+    author: User
 }
 
 export default User
