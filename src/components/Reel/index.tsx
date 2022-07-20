@@ -3,6 +3,7 @@ import ReelVideo from '../ReelVideo'
 import ReelHandler from '../ReelHandler'
 import ReelCommentLayout from 'components/ReelComments'
 import ReelDescription from '../ReelHandler/ReelDescription/layout2'
+import ReelCommentChats from 'components/ReelComments/ReelCommentChats'
 import {ReelProp} from 'model/type/Reel'
 import ReelStyles from './Reel.module.css'
 
@@ -31,12 +32,15 @@ const Reel:React.FC<reelPropUpdated & ReelProp> = ({ reel, reelObserver, isCurre
             {
                 commentVisible &&
                 (
-                    <div className={"w-full h-full bg-black-200 " + ReelStyles.commentContainer}>
-                        <ReelCommentLayout>
-                            <ReelDescription reel={reel} />
-                            <div className="text-white text-xs ml-12 mt-1">3h</div>
-                        </ReelCommentLayout>
-                    </div>
+                    <>
+                        <div className={"w-full h-full bg-black-200 " + ReelStyles.commentContainer}>
+                            <ReelCommentLayout>
+                                <ReelDescription reel={reel} />
+                                <div className="text-white text-xs ml-12 mt-1">3h</div>
+                            </ReelCommentLayout>
+                            <ReelCommentChats />
+                        </div>
+                    </>
                 )
             }
             <div id="screenTop" className="-translate-y-2" ref={node} data-reel-id={reel._id}></div>

@@ -55,5 +55,5 @@ export const fetchXRandomUsers = (count: Number): User[] => {
 }
 
 export const isFollowing = (user1: User, user2: User): Boolean => {
-    return user1.follows.includes(user2._id)
+    return (user1 && user2) ? user1.follows.includes(user2._id) : false
 }
