@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import UserProfile from "components/UserProfile"
 import ReelCommentInput from "../ReelCommentInput"
 import User from "model/type/User"
@@ -13,87 +13,108 @@ interface CommentInterface {
     likes: Number
 }
 
+const defaultComments = [
+    {
+        author: {
+            _id: '124',
+            name: 'user 1',
+            profileUrl: 'https://rb.gy/34qker',
+            following: false,
+            follows: []
+        },
+        text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
+        createdOn: '202012121102',
+        pinned: false,
+        likes: 23
+    },
+    {
+        author: {
+            _id: '124',
+            name: 'user 1',
+            profileUrl: 'https://rb.gy/34qker',
+            following: false,
+            follows: []
+        },
+        text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
+        createdOn: '202012121102',
+        pinned: false,
+        likes: 23
+    },
+    {
+        author: {
+            _id: '124',
+            name: 'user 1',
+            profileUrl: 'https://rb.gy/34qker',
+            following: false,
+            follows: []
+        },
+        text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
+        createdOn: '202012121102',
+        pinned: false,
+        likes: 23
+    },
+    {
+        author: {
+            _id: '124',
+            name: 'user 1',
+            profileUrl: 'https://rb.gy/34qker',
+            following: false,
+            follows: []
+        },
+        text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
+        createdOn: '202012121102',
+        pinned: false,
+        likes: 23
+    },
+    {
+        author: {
+            _id: '124',
+            name: 'user 1',
+            profileUrl: 'https://rb.gy/34qker',
+            following: false,
+            follows: []
+        },
+        text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
+        createdOn: '202012121102',
+        pinned: false,
+        likes: 23
+    },
+    {
+        author: {
+            _id: '124',
+            name: 'user 1',
+            profileUrl: 'https://rb.gy/34qker',
+            following: false,
+            follows: []
+        },
+        text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
+        createdOn: '202012121102',
+        pinned: false,
+        likes: 23
+    }
+]
+
 const ReelCommentChats: React.FC = () => {
-    const comments: CommentInterface[] = [
-        {
-            author: {
-                _id: '124',
-                name: 'user 1',
-                profileUrl: 'https://rb.gy/34qker',
-                following: false,
-                follows: []
-            },
-            text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
-            createdOn: '202012121102',
-            pinned: false,
-            likes: 23
-        },
-        {
-            author: {
-                _id: '124',
-                name: 'user 1',
-                profileUrl: 'https://rb.gy/34qker',
-                following: false,
-                follows: []
-            },
-            text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
-            createdOn: '202012121102',
-            pinned: false,
-            likes: 23
-        },
-        {
-            author: {
-                _id: '124',
-                name: 'user 1',
-                profileUrl: 'https://rb.gy/34qker',
-                following: false,
-                follows: []
-            },
-            text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
-            createdOn: '202012121102',
-            pinned: false,
-            likes: 23
-        },
-        {
-            author: {
-                _id: '124',
-                name: 'user 1',
-                profileUrl: 'https://rb.gy/34qker',
-                following: false,
-                follows: []
-            },
-            text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
-            createdOn: '202012121102',
-            pinned: false,
-            likes: 23
-        },
-        {
-            author: {
-                _id: '124',
-                name: 'user 1',
-                profileUrl: 'https://rb.gy/34qker',
-                following: false,
-                follows: []
-            },
-            text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
-            createdOn: '202012121102',
-            pinned: false,
-            likes: 23
-        },
-        {
-            author: {
-                _id: '124',
-                name: 'user 1',
-                profileUrl: 'https://rb.gy/34qker',
-                following: false,
-                follows: []
-            },
-            text: 'some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.some text written here which is not written anywhere.',
-            createdOn: '202012121102',
-            pinned: false,
-            likes: 23
+    const [comments, setComments] = useState<CommentInterface[]>(defaultComments)
+
+    const addComment = (comment: string) => {
+        const myAuthor: User = {
+            _id: '124',
+            name: 'user 1',
+            profileUrl: 'https://rb.gy/34qker',
+            following: false,
+            follows: []
         }
-    ]
+        const commentObj = {
+            author: myAuthor,
+            text: comment,
+            createdOn: '',
+            pinned: false,
+            likes: 0
+        }
+        setComments((prev) => [commentObj, ...prev])
+        console.log('adding comment', comment)
+    }
 
     return (
         <div className={"text-white text-sm absolute overflow-y-auto " + ReelCommentChatStyles['container']}>
@@ -105,11 +126,17 @@ const ReelCommentChats: React.FC = () => {
                             {comment.text}
                             <div className="mt-1 text-sm text-gray-500 flex space-x-4">
                                 <span>2h</span>
-                                <span className="flex">
-                                    <CoreIcon icon="FireIcon" className="w-4 fill-gray-300 mr-1" />
-                                    Pinned
-                                </span>
-                                <span> {comment.likes + ' likes'} </span>
+                                {
+                                    comment.pinned &&
+                                    <span className="flex">
+                                        <CoreIcon icon="FireIcon" className="w-4 fill-gray-300 mr-1" />
+                                        Pinned
+                                    </span>
+                                }
+                                {
+                                    comment.likes > 0 &&
+                                    <span> {comment.likes + ' likes'} </span>
+                                }
                             </div>
                         </UserProfile>
                     </div>
@@ -117,7 +144,9 @@ const ReelCommentChats: React.FC = () => {
             }
             </div>
             <div className={"sticky bottom-4 w-full" + ReelCommentChatStyles['comment-input']}>
-                <ReelCommentInput />
+                <div>
+                </div>
+                <ReelCommentInput addCommentHandler={addComment} />
             </div>
         </div>
     )
