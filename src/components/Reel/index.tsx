@@ -16,7 +16,7 @@ interface reelPropUpdated {
 
 const Reel:React.FC<reelPropUpdated & ReelProp> = ({ reel, reelObserver, isCurrentReel }) => {
     const node = useRef<HTMLDivElement>(null)
-    const [commentVisible, setCommentVisible] = useState(true)
+    const [commentVisible, setCommentVisible] = useState(false)
 
     useEffect(() => {
         node.current && reelObserver.observeNode(node.current)

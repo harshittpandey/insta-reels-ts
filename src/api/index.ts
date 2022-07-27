@@ -2,7 +2,7 @@ import Reel from "../model/type/Reel"
 import Comment from "../model/type/Comment"
 import ReelsFixture from "./fixtures/Reel"
 import CommentsFixture from "./fixtures/Comment"
-import {Users, fetchXRandomUsers, isFollowing} from "./fixtures/User"
+import {Users, fetchUserById, isFollowing} from "./fixtures/User"
 import User from "model/type/User"
 
 export default {
@@ -30,7 +30,7 @@ export default {
      * @returns User[], list of users who liked the reel
     */
     getLikesOnReel: function (reel: Reel) {
-        return fetchXRandomUsers(reel.likes)
+        return reel.likes.map(userId => fetchUserById(userId))
     },
 
     /**
@@ -50,6 +50,9 @@ export default {
         return CommentsFixture.fetchReplies(commentId, offset, limit)
     },
 
+    getMyUser: function () {
+        return fetchUserById(Users[0]._id) as User
+    },
 
     isFollowing: function(myUserId: String, targetUserId: String) {
         const myUser = Users.find(user => user._id === myUserId) as User

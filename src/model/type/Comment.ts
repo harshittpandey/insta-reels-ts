@@ -5,10 +5,9 @@ export interface Comment {
     author: User
     isPinned?: Boolean
     likes: Number
-    replies?: Number
     reelId?: String
-    commentId?: String
     comment: String
+    createdOn?: String
 }
 
 export default Comment

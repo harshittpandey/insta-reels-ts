@@ -8,7 +8,7 @@ export interface Reel {
     audioProfile?: String | null
     thumbnail: String | null
     description: String
-    likes: Number
+    likes: String[] // user ids
     comments: Number
 }
 

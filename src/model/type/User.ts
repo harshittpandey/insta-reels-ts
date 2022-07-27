@@ -2,8 +2,8 @@ export interface User {
     _id: String
     name: String
     profileUrl: String
-    following: Boolean
-    follows: String[]
+    followers: String[]
+    following: String[]
 }
 
 export interface UserProp {

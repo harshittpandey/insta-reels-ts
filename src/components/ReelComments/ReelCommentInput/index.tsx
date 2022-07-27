@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react"
 import User from "model/type/User"
+import API from "api"
 import ProfileImage from "components/UserProfile/ProfileImage"
 
 interface CommentInputProps {
@@ -8,13 +9,7 @@ interface CommentInputProps {
 
 const ReelCommentInput: React.FC<CommentInputProps> = ({ addCommentHandler }) => {
 
-    const myAuthor: User = {
-        _id: '124',
-        name: 'user 1',
-        profileUrl: 'https://rb.gy/34qker',
-        following: false,
-        follows: []
-    }
+    const myAuthor: User = API.getMyUser()
 
     // comment input handlers
     const commentInput = useRef<HTMLInputElement>(null)
