@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { LAYOUTS } from 'redux/constant'
 import {CoreIcon} from '../../../core-ui'
 
 interface ActionItemInterface {
@@ -26,11 +28,15 @@ const actionItemGenerator = ({ iconEl, statsEl, id, className, isActionClickable
 }
 
 const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, isLikedByMe }) => {
+    const dispatch = useDispatch()
     const handleLikeClick = () => {
         console.log('like clickable')
     }
     const handleCommentClick = () => {
-        console.log('show comment layout')
+        dispatch({
+            type: 'UPDATE_LAYOUT',
+            value: LAYOUTS.COMMENT
+        })
     }
     const handleShareClick = () => {}
     const actions: {[key: string]: ActionItemInterface} = {
