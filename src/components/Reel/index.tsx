@@ -42,7 +42,7 @@ const Reel:React.FC<reelPropUpdated & ReelProp> = ({ reel, reelObserver, isCurre
                                 <ReelDescription reel={reel} />
                                 <div className="text-white text-xs ml-12 mt-1">3h</div>
                             </ReelCommentLayout>
-                            <ReelCommentChats />
+                            <ReelCommentChats reel={reel} />
                         </div>
                     </>
                 )

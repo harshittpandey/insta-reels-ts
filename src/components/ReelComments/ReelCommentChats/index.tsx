@@ -1,8 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import UserProfile from "components/UserProfile"
 import ReelCommentInput from "../ReelCommentInput"
 import User from "model/type/User"
 import Comment from "model/type/Comment"
+import { ReelProp } from "model/type/Reel"
 import {CoreIcon} from 'core-ui'
 import ReelCommentChatStyles from "./ReelCommentChats.module.css"
 
@@ -16,8 +17,12 @@ interface CommentInterface {
     likes: Number
 }
 
-const ReelCommentChats: React.FC = () => {
+const ReelCommentChats: React.FC<ReelProp> = ({ reel }) => {
     const [comments, setComments] = useState<Comment[]>([])
+
+    useEffect(() => {
+        setComments(API.getCommentsOnReel(reel))
+    }, [reel])
 
     const addComment = (comment: string) => {
         const author: User = API.getMyUser() as User

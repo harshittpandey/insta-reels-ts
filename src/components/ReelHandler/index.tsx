@@ -18,7 +18,7 @@ const ReelHandler: React.FC<updatedReelProps> = ({reel, isCurrentReelVisible, is
     return (
         <div className={"reel-handler mx-3 my-3 flex flex-wrap absolute bottom-0 " + ReelHanlderStyles.reelHandler}>
             <ReelDescription reel={reel} />
-            <ReelActions isCurrentReelVisible={isCurrentReelVisible} isLikedByMe={isLikedByMe} />
+            <ReelActions isCurrentReelVisible={isCurrentReelVisible} isLikedByMe={isLikedByMe} reel={reel} />
             {
                 reel.audio &&
                 (

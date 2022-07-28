@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { LAYOUTS } from 'redux/constant'
+import { ReelProp } from "model/type/Reel"
 import {CoreIcon} from '../../../core-ui'
 
 interface ActionItemInterface {
@@ -13,7 +14,7 @@ interface ActionItemInterface {
     clickCallback: () => void
 }
 
-interface ActionProps {
+interface ActionProps extends ReelProp {
     isCurrentReelVisible: Boolean
     isLikedByMe: Boolean
 }
@@ -27,7 +28,7 @@ const actionItemGenerator = ({ iconEl, statsEl, id, className, isActionClickable
     )
 }
 
-const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, isLikedByMe }) => {
+const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, isLikedByMe, reel }) => {
     const dispatch = useDispatch()
     const handleLikeClick = () => {
         console.log('like clickable')
@@ -43,14 +44,14 @@ const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, isLikedByMe 
         heart: {
             iconEl: <CoreIcon icon="HeartIcon" outline className="text-white w-9 stroke-1.5" />,
             iconElClicked: <CoreIcon icon="HeartIcon" className="fill-red-600 w-10 h-10" />,
-            statsEl: <span className="text-white font-light">{'20'}</span>,
+            statsEl: <span className="text-white font-light">{reel.likes.length}</span>,
             id: 'heart',
             className: 'flex flex-col items-center py-2',
             clickCallback: handleLikeClick
         },
         comment: {
             iconEl: <CoreIcon icon="ChatIcon" outline className="text-white w-9 py-0 stroke-1.5" />,
-            statsEl: <span className="text-white font-light">{'20'}</span>,
+            statsEl: <span className="text-white font-light">{reel.comments + ''}</span>,
             id: 'comment',
             className: 'flex flex-col items-center py-2',
             clickCallback: handleCommentClick
