@@ -1,0 +1,9 @@
+.reel-share-container {
+    height: 50vh;
+    overflow-y: scroll;
+    background: #262626;
+}
+
+.reel-share-input {
+    background: #363636;
+}

@@ -39,7 +39,12 @@ const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, isLikedByMe,
             value: LAYOUTS.COMMENT
         })
     }
-    const handleShareClick = () => {}
+    const handleShareClick = () => {
+        dispatch({
+            type: 'UPDATE_LAYOUT',
+            value: LAYOUTS.SHARE
+        })
+    }
     const actions: {[key: string]: ActionItemInterface} = {
         heart: {
             iconEl: <CoreIcon icon="HeartIcon" outline className="text-white w-9 stroke-1.5" />,

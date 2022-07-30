@@ -39,8 +39,8 @@ const ReelCommentChats: React.FC<ReelProp> = ({ reel }) => {
     }
 
     return (
-        <div className={"text-white text-sm absolute overflow-y-auto w-full relative " + ReelCommentChatStyles['container']}>
-            <div className="p-4">
+        <div className={"text-white text-sm w-full relative "}>
+            <div className={"p-4 overflow-auto " + ReelCommentChatStyles['container']}>
             {
                 comments.map((comment: Comment) => (
                     <div className="mb-4">
@@ -65,9 +65,7 @@ const ReelCommentChats: React.FC<ReelProp> = ({ reel }) => {
                 ))
             }
             </div>
-            <div className={"absolute bottom-20 w-full " + ReelCommentChatStyles['comment-input']}>
-                <div>
-                </div>
+            <div className={"absolute bottom-3 w-full " + ReelCommentChatStyles['comment-input']}>
                 <ReelCommentInput addCommentHandler={addComment} />
             </div>
         </div>
