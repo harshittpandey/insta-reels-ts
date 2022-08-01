@@ -3,6 +3,7 @@ import User from "../../model/type/User"
 interface UserResponse {
     _id: String
     name: String
+    username?: String
     profileUrl: String
 }
 
@@ -10,26 +11,31 @@ export const Users: UserResponse[] = [
     {
         _id: '103547991597142817347',
         name: 'John Foo',
+        username: 'john-foooo',
         profileUrl: 'https://lh4.googleusercontent.com/-OdsbOXom9qE/AAAAAAAAAAI/AAAAAAAAADU/_j8SzYTOJ4I/photo.jpg'
     },
     {
         _id: '103547991597142817348',
         name: 'Michael Dam',
+        username: 'michael-ddamn',
         profileUrl: 'https://rb.gy/rpl1rl'
     },
     {
         _id: '103547991597142817349',
         name: 'Julian Wan',
+        username: 'julian',
         profileUrl: 'https://rb.gy/34qker'
     },
     {
         _id: '103547991597142817350',
         name: 'Christopher Campbell',
+        username: 'chris-campbell',
         profileUrl: 'https://rb.gy/xpc4my'
     },
     {
         _id: '103547991597142817351',
         name: 'Aiony Haust',
+        username: '___aiony',
         profileUrl: 'https://rb.gy/nohoot'
     }
 ]

@@ -1,6 +1,7 @@
 export interface User {
     _id: String
     name: String
+    username?: String
     profileUrl: String
     followers: String[]
     following: String[]

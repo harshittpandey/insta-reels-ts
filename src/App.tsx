@@ -2,18 +2,29 @@ import React, { useEffect, useState, useRef } from 'react';
 import ReelsController from './components/ReelsController'
 import ReelComponent from './components/Reel'
 import AppStyles from './App.module.css';
+import {fetchUserById} from "api/fixtures/User"
 
 // import {IntersectHandler} from 'core-ui/intersection-observer/v1'
 import { IntersectionObserverHandler } from 'core-ui/intersection-observer/v2'
 
 import API from './api'
+import {Users} from 'api/fixtures/User'
 import Reel from './model/type/Reel'
+
+import { useDispatch } from "react-redux"
 
 function App() {
   // Endpoint to fetch reels
   const loadMoreReels = () => {
     API.getNextReel().then((data)=> setReels((prevReels) => [...prevReels, ...data]))
   }
+
+  const dispatch = useDispatch()
+  const userId = Users[0]._id
+  dispatch({
+    type: 'SET_CURRENT_USER',
+    value: fetchUserById(userId)
+  })
 
   // list of reels loaded from API
   const [reels, setReels] = useState<Reel[]>([])

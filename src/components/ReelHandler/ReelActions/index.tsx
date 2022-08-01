@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 import { LAYOUTS } from 'redux/constant'
 import { ReelProp } from "model/type/Reel"
 import {CoreIcon} from '../../../core-ui'
+import {DEFAULT_STATE_INTERFACE} from 'redux/state'
+import { useSelector } from 'react-redux'
 
 interface ActionItemInterface {
     iconEl: JSX.Element | JSX.Element[],
@@ -16,7 +18,6 @@ interface ActionItemInterface {
 
 interface ActionProps extends ReelProp {
     isCurrentReelVisible: Boolean
-    isLikedByMe: Boolean
 }
 
 const actionItemGenerator = ({ iconEl, statsEl, id, className, isActionClickable, clickCallback }: ActionItemInterface): JSX.Element => {
@@ -28,10 +29,25 @@ const actionItemGenerator = ({ iconEl, statsEl, id, className, isActionClickable
     )
 }
 
-const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, isLikedByMe, reel }) => {
+const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, reel }) => {
+    const currentUser = useSelector((state: DEFAULT_STATE_INTERFACE) => state.currentUser)
+    const [isLikedByMe, setIsLikedByMe] = useState(false)
+    useEffect(() => {
+        currentUser && setIsLikedByMe(reel.likes.includes(currentUser._id + ''))
+    }, [reel, currentUser])
+
     const dispatch = useDispatch()
     const handleLikeClick = () => {
-        console.log('like clickable')
+        if (isLikedByMe) {
+            const idx = reel.likes.indexOf(currentUser?._id + '')
+            if (idx > -1) {
+                reel.likes.splice(idx, 1)
+            }
+            setIsLikedByMe(false)
+        } else {
+            currentUser && reel.likes.push(currentUser._id)
+            setIsLikedByMe(true)
+        }
     }
     const handleCommentClick = () => {
         dispatch({
@@ -47,9 +63,9 @@ const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, isLikedByMe,
     }
     const actions: {[key: string]: ActionItemInterface} = {
         heart: {
-            iconEl: <CoreIcon icon="HeartIcon" outline className="text-white w-9 stroke-1.5" />,
+            iconEl: <CoreIcon icon="HeartIcon" outline className="text-white w-10 stroke-1.5" />,
             iconElClicked: <CoreIcon icon="HeartIcon" className="fill-red-600 w-10 h-10" />,
-            statsEl: <span className="text-white font-light">{reel.likes.length}</span>,
+            statsEl: <span className="text-white font-light">{reel.likes.length + ''}</span>,
             id: 'heart',
             className: 'flex flex-col items-center py-2',
             clickCallback: handleLikeClick
