@@ -4,6 +4,7 @@ import { LAYOUTS } from 'redux/constant'
 import { ReelProp } from "model/type/Reel"
 import {CoreIcon} from '../../../core-ui'
 import {DEFAULT_STATE_INTERFACE} from 'redux/state'
+import ReelActionStyles from "./ReelAction.module.css"
 import { useSelector } from 'react-redux'
 
 interface ActionItemInterface {
@@ -32,6 +33,7 @@ const actionItemGenerator = ({ iconEl, statsEl, id, className, isActionClickable
 const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, reel }) => {
     const currentUser = useSelector((state: DEFAULT_STATE_INTERFACE) => state.currentUser)
     const [isLikedByMe, setIsLikedByMe] = useState(false)
+    const [heartPopUp, setHeartPopUp] = useState(false)
     useEffect(() => {
         currentUser && setIsLikedByMe(reel.likes.includes(currentUser._id + ''))
     }, [reel, currentUser])
@@ -47,6 +49,8 @@ const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, reel }) => {
         } else {
             currentUser && reel.likes.push(currentUser._id)
             setIsLikedByMe(true)
+            setHeartPopUp(true)
+            setTimeout(() => setHeartPopUp(false), 1000)
         }
     }
     const handleCommentClick = () => {
@@ -88,6 +92,18 @@ const ReelActions: React.FC<ActionProps> = ({ isCurrentReelVisible, reel }) => {
     return (
         <div className="reel-actions">
             {/* w-fit mx-3 fixed bottom-0 right-0 */}
+            {
+                heartPopUp &&
+                (
+                    <div
+                        className={heartPopUp ? ReelActionStyles['fadeIn'] : ReelActionStyles['fadeOut']}>
+                        <CoreIcon
+                            icon={"HeartIcon"}
+                            className={"fill-red-500 w-1/5"}
+                        />
+                    </div>
+                )
+            }
             {
                 Object.values(actions).map((action: ActionItemInterface) => {
                     if (action.id === 'heart' && isLikedByMe && action.iconElClicked) {

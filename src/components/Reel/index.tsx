@@ -20,7 +20,6 @@ interface reelPropUpdated {
 const Reel:React.FC<reelPropUpdated & ReelProp> = ({ reel, reelObserver, isCurrentReel }) => {
     const node = useRef<HTMLDivElement>(null)
     const currentLayout = useSelector((state: DEFAULT_STATE_INTERFACE) => state.currentLayout)
-    const [commentVisible, setCommentVisible] = useState(true)
 
     useEffect(() => {
         node.current && reelObserver.observeNode(node.current)
@@ -28,7 +27,7 @@ const Reel:React.FC<reelPropUpdated & ReelProp> = ({ reel, reelObserver, isCurre
 
     return (
         <div className={`${ReelStyles.reel} w-full h-full`}>
-            <span className="absolute text-blue-400 right-0">{'isShown: ' + isCurrentReel}</span>
+            {/* <span className="absolute text-blue-400 right-0">{'isShown: ' + isCurrentReel}</span> */}
             <div className={"w-full h-full " + ((currentLayout === LAYOUTS.COMMENT) && ReelStyles.videoOnCommentLayout)} >
                 <ReelVideo reel={ reel } isCurrentReelVisible={ isCurrentReel } />
                 <ReelHandler reel={ reel } isCurrentReelVisible={ isCurrentReel } />

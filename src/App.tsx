@@ -12,6 +12,7 @@ import {Users} from 'api/fixtures/User'
 import Reel from './model/type/Reel'
 
 import { useDispatch } from "react-redux"
+import { PLACEHOLDER_REEL_ID } from 'api/fixtures/Reel';
 
 function App() {
   // Endpoint to fetch reels
@@ -58,7 +59,7 @@ function App() {
 
   return (
     <div className={`${AppStyles['reels-container']} w-screen h-screen`}>
-      <ReelsController />
+      <ReelsController isPlaceholder={currentReel === PLACEHOLDER_REEL_ID} />
       {
         reels.map(reel => 
           <ReelComponent

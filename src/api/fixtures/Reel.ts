@@ -18,11 +18,21 @@ interface ReelStats {
     comments: Number
 }
 
+export const PLACEHOLDER_REEL_ID = "PLACEHOLDER_REEL"
+
 export default (function () {
     let start: Number = 0
+    const placeholderReel: ReelResponse ={
+        "_id": PLACEHOLDER_REEL_ID,
+        "author_id": "",
+        "description" : "",
+        "source" : "",
+        "thumbnail" : "https://picsum.photos/id/0/400/800"
+    }
+    const allVideos = [placeholderReel, ...Videos.videos]
     // implement hasNext here
     const nextReel = (nextCounter: Number): Reel[] => {
-        const videos = Videos.videos.slice(+start, (+start) + (+nextCounter))
+        const videos = allVideos.slice(+start, (+start) + (+nextCounter))
         start = (+start) + (+nextCounter)
         return videos.map(({ _id, source, description, thumbnail, author_id }: ReelResponse) => {
             const author = fetchUserById(author_id) as User

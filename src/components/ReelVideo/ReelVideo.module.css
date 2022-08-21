@@ -1,0 +1,11 @@
+.reel-video {
+    width: 100% !important;
+    height: 100% !important;
+}
+.reel-video video {
+    object-fit: fill;
+}
+.volume-icon {
+    box-sizing: content-box;
+    width: 40px;
+}
