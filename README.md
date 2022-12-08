@@ -1,1 +1,4 @@
-https://github.com/harshittpandey/insta-reels-ts/blob/master/Screen%20Recording%202022-09-18%20at%2010.26.10%20PM.mov
+
+
+https://user-images.githubusercontent.com/22426931/206400331-d967ec89-aac7-4d33-9c6e-a0b0f4638206.mp4
+
